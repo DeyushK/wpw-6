@@ -23,9 +23,9 @@ model2=keras.models.load_model('models/wpw models/2d CNN/WPW_2d_att1.h5')
 @app.route('/index')
 def index():
     return render_template('index.html')
-@app.route('/detect') 
+@app.route('/Detect') 
 def detect():
-    return render_template('detect.html')
+    return render_template('Detect.html')
 @app.route('/Detect',methods=['POST'])
 def ECG():
     if request.method == 'POST':
