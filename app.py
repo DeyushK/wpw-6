@@ -25,8 +25,8 @@ def index():
     return render_template('index.html')
 @app.route('/detect') 
 def detect():
-    return render_template('detect.html')
-@app.route('/Detect',methods=['POST'])
+    return render_template('Detect.html')
+@app.route('/detect',methods=['POST'])
 def ECG():
     if request.method == 'POST':
         name=request.form['name']
@@ -52,7 +52,7 @@ def ECG():
         elif(pr[0][0]<pr[0][1]):
                 prediction='Positive'
         print(prediction)
-        return render_template('detect.html',pred='{}'.format(prediction))
+        return render_template('Detect.html',pred='{}'.format(prediction))
 def remove_some_ecgs(ecg_arr):
     delete_list = []
     for i in tqdm(range(len(ecg_arr))):
