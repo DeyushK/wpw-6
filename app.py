@@ -26,7 +26,7 @@ def index():
 @app.route('/detect') 
 def detect():
     return render_template('Detect.html')
-@app.route('/detect',methods=['POST'])
+@app.route('/Detect',methods=['POST'])
 def ECG():
     if request.method == 'POST':
         name=request.form['name']
@@ -67,7 +67,6 @@ def resample_beats(beats):
     rsmp_beats=[]
     for i in beats:
         i = np.asarray(i)
-
         #i = i[~np.isnan(i)]
         f = signal.resample(i, 250)
         rsmp_beats.append(f)
