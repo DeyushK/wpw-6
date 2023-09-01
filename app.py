@@ -44,7 +44,10 @@ def ECG():
         x=remove_nans(x)
         x=remove_some_ecgs(x)
         x = np.moveaxis(x, 1, -1)
-        pr=model2.predict(x)
+        # Save the ECG data to a variable
+        ecg_data = x
+        # Pass the ECG data to the predict() method
+        pr=model2.predict(ecg_data)
         print(pr[0][0])
         print(pr[0][1])
         if(pr[0][0]>pr[0][1]):
@@ -129,7 +132,7 @@ def import_ecg_data(directory, ecg_len = 5000, trunc="post", pad="post"):
             data = pad_sequences(data, maxlen=ecg_len, truncating=trunc,padding=pad)
             ecgs.append(data)
     print("Finished!")
-    return np.asarray(ecgs)
+    return np.array(ecgs)
 @app.route('/sy')
 def Symptoms():
     return render_template('sy.html')
