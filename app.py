@@ -26,7 +26,7 @@ def index():
 @app.route('/detect') 
 def detect():
     return render_template('Detect.html')
-@app.route('/Detect',methods=['POST'])
+@app.route('/detect',methods=['POST'])
 def ECG():
     if request.method == 'POST':
         name=request.form['name']
@@ -44,8 +44,8 @@ def ECG():
         x=remove_nans(x)
         x=remove_some_ecgs(x)
         x = np.moveaxis(x, 1, -1)
-        # Save the ECG data to a variable
         ecg_data = x
+        # Save the ECG data to a variable
         # Pass the ECG data to the predict() method
         pr=model2.predict(ecg_data)
         print(pr[0][0])
