@@ -42,12 +42,11 @@ def ECG():
         x= import_ecg_data(p)
         x = process_ecgs(x)
         x=remove_nans(x)
-        x=remove_some_ecgs(x)
-        x = np.moveaxis(x, 1, -1)
-        ecg_data = x
-        # Save the ECG data to a variable
-        # Pass the ECG data to the predict() method
-        pr=model2.predict(ecg_data)
+        # x=remove_some_ecgs(x)
+        x=np.moveaxis(x, 1, -1)
+        print(x.shape)
+        print(x)
+        pr=model2.predict(x)
         print(pr[0][0])
         print(pr[0][1])
         if(pr[0][0]>pr[0][1]):
@@ -55,7 +54,8 @@ def ECG():
         elif(pr[0][0]<pr[0][1]):
                 prediction='Positive'
         print(prediction)
-        return render_template('Detect.html',pred='{}'.format(prediction))
+        time.sleep(5)
+        return render_template('detect.html',pred='{}'.format(prediction))
 def remove_some_ecgs(ecg_arr):
     delete_list = []
     for i in tqdm(range(len(ecg_arr))):
@@ -67,6 +67,7 @@ def resample_beats(beats):
     rsmp_beats=[]
     for i in beats:
         i = np.asarray(i)
+
         #i = i[~np.isnan(i)]
         f = signal.resample(i, 250)
         rsmp_beats.append(f)
@@ -131,7 +132,7 @@ def import_ecg_data(directory, ecg_len = 5000, trunc="post", pad="post"):
             data = pad_sequences(data, maxlen=ecg_len, truncating=trunc,padding=pad)
             ecgs.append(data)
     print("Finished!")
-    return np.array(ecgs)
+    return np.asarray(ecgs)
 @app.route('/sy')
 def Symptoms():
     return render_template('sy.html')
