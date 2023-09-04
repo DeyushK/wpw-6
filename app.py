@@ -68,7 +68,7 @@ def resample_beats(beats):
     for i in beats:
         i = np.asarray(i)
 
-        #i = i[~np.isnan(i)]
+        i = i[~np.isnan(i)]
         f = signal.resample(i, 250)
         rsmp_beats.append(f)
     rsmp_beats = np.asarray(rsmp_beats)
