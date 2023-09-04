@@ -42,7 +42,7 @@ def ECG():
         x= import_ecg_data(p)
         x = process_ecgs(x)
         x=remove_nans(x)
-        # x=remove_some_ecgs(x)
+        x=remove_some_ecgs(x)
         x=np.moveaxis(x, 1, -1)
         print(x.shape)
         print(x)
